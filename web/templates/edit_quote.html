@@ -1,0 +1,186 @@
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed"/>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDIT QUOTE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/add_new_quote.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+<body>
+<center>
+    <h1 class="text-center pt-5">EDIT QUOTE</h1>
+</center>
+<br>
+<a href="quotations">
+    <input type="button"
+           name="back"
+           class="btn btn-info btn-md"
+           style="position: absolute ; top: 90%; left: 5.5%; width: 20%; min-width:50px;max-width:80px"
+           value="BACK">
+</a>
+<form action=""
+      method="post"
+      id="editQuote"
+      enctype="multipart/form-data">
+    <div class="box" id=first
+         style="background-color:#727271; width: 100%; min-width:600px;max-width:1200px; top: 13%; left: 3%">
+        <label for="edit_brand" class="text-info"><span>BRAND</span>
+            <input type="text"
+                   required="true"
+                   id="edit_brand"
+                   class="text-box"
+                   name="brand"
+                   style="width:30%; min-width:30px;max-width:600px"
+                   maxlength="40"
+                   value="{{request.form.brand}}"/>
+        </label>
+
+        <label for="edit_group" class="text-info"><span>GROUP</span>
+            <input type="text"
+                   id="edit_group"
+                   class="text-box"
+                   name="group"
+                   style="width:30%; min-width:30px;max-width:600px"
+                   maxlength="20"
+                   value="{{request.form.group}}"/>
+        </label>
+
+        <label for="edit_supplier" class="text-info"><span>SUPPLIER</span>
+            <select id="edit_supplier"
+                    class="text-box"
+                    action="/suppliers/<login_supplier>"
+                    required="true"
+                    aria-multiselectable="true"
+                    autofocus
+                    name="supplier"
+                    style="width:20%; min-width:10px;max-width:500px"
+                    value="{{request.form.supplier}}">
+                <option value=""></option>
+                {% for supplier in suppliers %}
+                <option value="{{ supplier.nombre}}">{{ supplier.nombre}}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+
+    </br>
+    <div class="box" id=2nd
+         style="background-color:#727271; width: 100%; min-width:600px;max-width:1200px; top: 53%; left: 3%">
+        <label for="edit_team" class="text-info"><span>TEAM</span>
+            <select id="edit_team"
+                    class="text-box"
+                    name="team"
+                    style="width:30%; min-width:30px;max-width:600px"
+                    value="{{request.form.team}}">
+                <option value=""></option>
+                <option value="Angie">Angie</option>
+                <option value="Sofia">Sofia</option>
+                <option value="Pepa">Pepa</option>
+                <option value="Julia">Julia</option>
+                <option value="Fede">Fede</option>
+                <option value="Caro">Caro</option>
+                <option value="Angeles">Angeles</option>
+            </select>
+        </label>
+        <label for="edit_dead-line" class="text-info"><span>DEAD LINE</span>
+            <input type="date"
+                   id="edit_dead-line"
+                   class="text-box"
+                   name="dead_line"
+                   style="width:17%"
+                   value="{{request.form.dead_line}}">
+        </label>
+        <label for="edit_status" class="text-info"><span>STATUS</span>
+            <select type="text"
+                    id="edit_status"
+                    class="text-box"
+                    name="status"
+                    style="width:30%; min-width:30px;max-width:600px"
+                    value="{{request.form.status}}">
+                <option value=""></option>
+                <option value="1st QUOTE">QUOTEING</option>
+                <option value="1st QUOTE">1ST QUOTE</option>
+                <option value="1st QUOTE">1ST QUOTE</option>
+                <option value="2nd QUOTE">2nd QUOTE</option>
+                <option value="3rd QUOTE">3rd QUOTE</option>
+                <option value="CONFIRM">CONFIRM</option>
+                <option value="CANCEL">CANCEL</option>
+            </select>
+        </label>
+    </div>
+    <br>
+    <br>
+    <div class="area" id=three>
+        <label class="texto-enlace"
+               style="position: absolute ; top: 45%; left: 5%">STYLES WORKFILE</label>
+        <input type="file"
+               name="workfile"
+               id="edit_workfile"
+               class="inputfile"
+               data-multiple-caption="{count} files selected" multiple>
+        <label for="edit_workfile"
+               style="position: absolute ; top: 55%; left: 5%"><span>ATTACH FILE</span></label>
+    </div>
+    <div class="area" id=four>
+        <label class="texto-enlace"
+               style="position: absolute ; top: 45%; left: 18%">SIZE SPEC</label>
+
+        <input type="file"
+               name="measures"
+               id="edit_measures"
+               class="inputfile">
+        <label for="edit_measures"
+               style="position: absolute ; top: 55%; left: 16.5%"><span>ATTACH FILE</span></label>
+    </div>
+
+    <div class="area" id=nine>
+        <label class="texto-enlace"
+               style="position: absolute ; top: 45%; left: 31%">STYLE NAME</label>
+        <input type="text"
+               required="true"
+               id="edit_style"
+               class="text-box"
+               name="style"
+               style="width:15%; position: absolute ; top: 54%; left: 26.5%"
+               maxlength="15"
+               value="{{request.form.style}}"/>
+    </div>
+    <div class="area" id=five>
+        <label class="text-info"
+               style="position: absolute ; top: 45%; left: 45.5%">QUANTITY</label>
+        <input type="text"
+               required="true"
+               id="edit_quantity"
+               class="text-box"
+               name="quantity"
+               style="width:10%; position: absolute ; top: 54%; left: 43%"
+               maxlength="15"
+               value="{{request.form.quantity}}"/>
+    </div>
+    <div class="area" id=ten>
+        <label class="texto-enlace"
+               style="position: absolute ; top: 45%; left: 68%">COMMENTS</label>
+        <input type="text"
+               required="true"
+               id="edit_comments"
+               class="text-box"
+               name="comments"
+               style="width:30%; position: absolute ; top: 54%; left: 55%"
+               maxlength="45"
+               value="{{request.form.comments}}"/>
+    </div>
+    <input type="submit"
+           name="submit"
+           class="btn btn-info btn-md"
+           style="position: absolute ; top: 90%; left: 47%; width: 10%; min-width:50px;max-width:80px"
+           value="SAVE">
+</form>
+{% if error %}
+<p><strong>Error:</strong> {{ error }}</p>
+{% endif %}
+<script src="/static/js/popup.js"></script>
+<script src="/static/js/add_new_quote.js"></script>
+</body>
+</html>

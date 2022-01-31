@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed"/>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BID2WIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/login.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+<body>
+<div id="login">
+    <h3 class="text-center text-white pt-5">
+        <center
+        /h3>
+        <img src="static/img/logo.png" height="100" width="170"/>
+        <!-- Login Form -->
+        <h3 class="text-center text-info">COMPANY</h3>
+        <form action=""
+              method="post"
+              name="customer_form"
+              autocomplete="off"
+              style="background-color:#727271; width: 26% center; min-width:200px;max-width:350px">
+            <input type="text"
+                   required="true"
+                   id="login_customer"
+                   class="text-box"
+                   name="login_customer"
+                   placeholder="User"
+                   style="width:70%"
+                   maxlength="20"
+                   value="{{request.form.login_customer}}">
+            </br>
+            </br>
+            <input type="password"
+                   required="true"
+                   id="password"
+                   class="text-box"
+                   name="password"
+                   placeholder="Password"
+                   style="width:70%"
+                   maxlength="20"
+                   value="{{request.form.password }}">
+            </br>
+            </br>
+            <label for="remember-me" class="text-info"><span>remember me</span> <span><input id="remember-me"
+                                                                                             name="remember-me"
+                                                                                             value="y"
+                                                                                             class="checkmark"
+                                                                                             type="checkbox"></span></label><br>
+        </br>
+            <input type="submit" name="submit" class="btn btn-info btn-md" value="ENTER">
+        </form>
+        <h3 class="text-center text-info">SUPPLIER</h3>
+        <form action="/login_suppliers"
+              method="post"
+              name="supplier_form"
+              autocomplete="off"
+              style="background-color:#727271; width: 26% center; min-width:200px;max-width:350px">
+            <input type="text"
+                   required="true"
+                   id="login_supplier"
+                   class="text-box"
+                   name="login_supplier"
+                   placeholder="User"
+                   style="width:70%"
+                   maxlength="20"
+                   value="{{request.form.login_supplier}}">
+            </br>
+            </br>
+            <input type="password"
+                   required="true"
+                   id="password_supplier"
+                   class="text-box"
+                   name="password_supplier"
+                   placeholder="Password"
+                   style="width:70%"
+                   maxlength="20"
+                   value="{{request.form.password_supplier}}">
+            </br>
+            </br>
+            <label for="remember-me" class="text-info"><span>remember me</span> <span><input id="remember-me"
+                                                                                             name="remember-me"
+                                                                                             value="y"
+                                                                                             class="checkmark"
+                                                                                             type="checkbox"></span></label><br>
+        </br>
+            <input type="submit" name="submit" class="btn btn-info btn-md" value="ENTER">
+        </form>
+        {% if error %}
+        <p><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
+</div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,101 @@
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed"/>
+<link href="http://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QUOTE IN PROCESS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/supplier_database.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+<body>
+<div>
+    <center>
+        <h1 class="text-center pt-5">QUOTE IN PROCESS</h1>
+    </center>
+    <br>
+</div>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+        <a href="add_new_quote">
+            <button class="btn btn-info btn-md"
+                    id="btn btn-info btn-md"
+                    style="position: absolute ; top: 15%; left: 82%; width: 50%; min-width:90px;max-width:150px">ADD NEW
+                QUOTE
+            </button>
+            <a href="inicio_cliente">
+                <input type="submit"
+                       name="back"
+                       class="btn btn-info btn-md"
+                       style="position: absolute ; top: 15%; left: 5.5%; width: 20%; min-width:50px;max-width:80px"
+                       value="BACK">
+            </a>
+            <table class="table custab"
+                   style="width: 100%; min-width:600px;max-width:1200px; position: absolute ; top: 23%; left: 5%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>BRAND</th>
+                    <th>GROUP</th>
+                    <th>STYLE</th>
+                    <th>QUANTITY</th>
+                    <th>SUPPLIER</th>
+                    <th>STATUS</th>
+                    <th>DEAD LINE</th>
+                    <th>COMMENTS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for quotation in quotations %}
+                <tr>
+                    <td>{{quotation.id_quote}}</td>
+                    <td>{{ quotation.brand }}</td>
+                    <td>{{ quotation.group_order }}</td>
+                    <td>{{ quotation.style }}</td>
+                    <td>{{ quotation.quantity_color }}</td>
+                    <td>{{ quotation.supplier }}</td>
+                    <td>{{ quotation.status }}</td>
+                    <td>{{ quotation.dead_line }}</td>
+                    <td>{{ quotation.comments }}</td>
+                    <td>
+                        <a href="edit_quote">
+                            <button type=button
+                                    class="btn-abrir"
+                                    id="btn-abrir"
+                                    style="width:52px;height:24px; font-size:14px">EDIT
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="/quotations/{{id_quote}}/eliminar" method="POST" style="margin-bottom:0px;">
+                            <input type="hidden"
+                                   name="delete_quotation"
+                                   value="{{id_quote}}">
+                            <input type="submit"
+                                   name="submit"
+                                   style="width:61px;height:24px; font-size:14px"
+                                   class="btn btn-info btn-md"
+                                   value="CANCEL">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/quotations/{{id_quote}}/confirm" method="POST" style="margin-bottom:0px;">
+                            <input type="hidden"
+                                   name="confirm_quotation"
+                                   value="{{id_quote}}">
+                            <input type="submit"
+                                   name="submit"
+                                   style="width:70px;height:24px; font-size:14px"
+                                   class="btn btn-info btn-md"
+                                   value="CONFIRM">
+                        </form>
+                        {% endfor %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+</body>
+</html>

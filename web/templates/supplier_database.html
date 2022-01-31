@@ -1,0 +1,106 @@
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed"/>
+<link href="http://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SUPPLIER DATA BASE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/supplier_database.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+<body>
+<div>
+    <center>
+        <h1 class="text-center pt-5">SUPPLIER DATA BASE</h1>
+    </center>
+    <br>
+</div>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+        <button class="btn-abrir-popup"
+                id="btn-abrir-popup"
+                style="position: absolute ; top: 15%; left: 82%; width: 50%; min-width:90px;max-width:150px">ADD NEW
+            SUPPLIER
+        </button>
+        <a href="inicio_cliente">
+        <input type="submit"
+           name="back"
+           class="btn btn-info btn-md"
+           style="position: absolute ; top: 15%; left: 5.5%; width: 20%; min-width:50px;max-width:80px"
+           value="BACK">
+        </a>
+        <table class="table custab"
+               style="width: 100%; min-width:600px;max-width:1200px; position: absolute ; top: 23%; left: 5%">
+            <thead>
+            <tr>
+                <th>NAME</th>
+                <th>COMPANY</th>
+                <th>EMAIL</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for supplier in suppliers %}
+            <tr>
+                <td>{{ supplier.nombre }}</td>
+                <td>{{ supplier.company }}</td>
+                <td>{{ supplier.email }}</td>
+                <td>
+                    <button class="btn-abrir-popup"
+                            id="btn-abrir-popup2"
+                            onclick="popupEdit('{{supplier.nombre}}', '{{supplier.email}}', '{{supplier.company}}')"
+                            style="width:56px;height:24px; font-size:14px">EDIT
+                    </button>
+                </td>
+                <td>
+                    <form action="/suppliers/{{supplier.nombre}}/eliminar" method="POST" style="margin-bottom:0px;">
+                        <input type="hidden"
+                               name="delete_supplier"
+                               value="{{login_supplier}}">
+                        <input type="submit"
+                               name="submit"
+                               style="width:61px;height:24px; font-size:14px"
+                               class="btn btn-info btn-md"
+                               value="DELETE">
+                    </form>
+                    {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="overlay" id="overlay">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            <h3>ADD NEW SUPPLIER</h3>
+            <form action="/add_suppliers" method="POST">
+                <div class="contenedor-inputs">
+                    <input type="text" placeholder="Name" name="login_supplier" value="{{request.form.login_supplier}}">
+                    <input type="text" placeholder="Password" name="password" value="{{request.form.password}}">
+                    <input type="email" placeholder="Email" name="email" value="{{request.form.email}}">
+                    <input type="text" placeholder="Company" name="company" value="{{request.form.company}}">
+                </div>
+                <input type="submit" class="btn-submit" value="SAVE">
+            </form>
+        </div>
+    </div>
+    <div class="overlay" id="overlay2">
+        <div class="popup" id="popup2">
+            <a href="suppliers" id="btn-cerrar-popup2" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            <h3>EDIT SUPPLIER</h3>
+            <form action="" method="POST" id="formPopUp">
+                <div class="contenedor-inputs">
+                    <input type="text" name="login_supplier" id="edit_login_supplier" value="{{request.form.login_supplier}}">
+                    <input type="password" name="password" placeholder="Add New Password"  id="edit_password" value="{{request.form.password}}">
+                    <input type="email" name="email" id="edit_email" value="{{request.form.email}}">
+                    <input type="text" name="company" id="edit_company" value="{{request.form.company}}">
+                </div>
+                <input type="submit" class="btn-submit" value="SAVE">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/js/popup.js"></script>
+</body>
+
+</html>

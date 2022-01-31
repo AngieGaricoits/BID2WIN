@@ -1,0 +1,65 @@
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed"/>
+<link href="http://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WELLCOME {{messages.login_supplier}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/supplier_database.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+
+<body>
+<div>
+    <center>
+        <h1 class="text-center pt-5">WELLCOME {{messages.login_supplier}} </h1>
+        <h2 class="text-center pt-5">QUOTE IN PROCESS</h2>
+    </center>
+    <br>
+</div>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table custab"
+               style="width: 100%; min-width:600px;max-width:1200px; position: absolute ; top: 23%; left: 5%">
+            <thead>
+            <tr>
+                <th>BRAND</th>
+                <th>GROUP</th>
+                <th>STYLE</th>
+                <th>QUANTITY</th>
+                <th>STATUS</th>
+                <th>DEAD LINE</th>
+                <th>TEAM</th>
+                <th>COMMENTS</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for quotation in quotations %}
+            <tr>
+                <td>{{ quotation.brand }}</td>
+                <td>{{ quotation.group_order }}</td>
+                <td>{{ quotation.style }}</td>
+                <td>{{ quotation.quantity_color }}</td>
+                <td>{{ quotation.status }}</td>
+                <td>{{ quotation.dead_line }}</td>
+                <td>{{ quotation.team }}</td>
+                <td>{{ quotation.comments }}</td>
+                <td>
+                    <a href="edit_quote_supplier">
+                            <button type=button
+                                    class="btn-abrir"
+                                    id="btn-abrir"
+                                    style="width:52px;height:24px; font-size:14px">EDIT
+                            </button>
+                    </a>
+                </td>
+                    {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+import sqlite3
+
+sql_tabla_usuario_cliente = """
+CREATE TABLE CUSTOMER(
+LOGIN_CUSTOMER TEXT PRIMARY KEY NOT NULL,
+PASSWORD TEXT NOT NULL,
+EMAIL TEXT NOT NULL,
+TEAM TEXT NOT NULL
+)
+"""
+
+sql_tabla_usuario_proveedor = """
+CREATE TABLE SUPPLIER(
+LOGIN_SUPPLIER TEXT PRIMARY KEY NOT NULL,
+PASSWORD TEXT NOT NULL,
+EMAIL TEXT NOT NULL,
+COMPANY TEXT NOT NULL
+)
+"""
+
+sql_tabla_cotizacion = """
+CREATE TABLE QUOTE(
+ID_QUOTE INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+TEAM TEXT NOT NULL,
+SUPPLIER TEXT NOT NULL,
+BRAND TEXT NOT NULL,
+QUANTITY_COLOR TEXT NOT NULL,
+GROUP_ORDER TEXT, 
+STYLE TEXT NOT NULL,
+STATUS TEXT NOT NULL,
+WORKFILE TEXT NOT NULL,
+MEASURES TEXT,
+DEAD_LINE DATE,
+COMMENTS TEXT,
+FOREIGN KEY(TEAM) REFERENCES CUSTOMER(TEAM),
+FOREIGN KEY(SUPPLIER) REFERENCES SUPPLIER(LOGIN_SUPPLIER),
+FOREIGN KEY(STATUS) REFERENCES STATUS(STATUS)
+)
+"""
+
+sql_tabla_status = """
+CREATE TABLE STATUS(
+STATUS_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,,
+STATUS TEXT NOT NULL,
+QUOTE_ID INTEGER NOT NULL,
+DATE DATE,
+FOREIGN KEY(QUOTE_ID) REFERENCES QUOTE(ID_QUOTE)
+)
+"""
+
+sql_tabla_chat = """
+CREATE TABLE CHAT(
+ID_CHAT INTEGER PRIMARY KEY AUTOINCREMENT,
+CUSTOMER TEXT NOT NULL,
+SUPPLIER TEXT NOT NULL,
+QUOTE_ID INTEGER NOT NULL,
+MESSAGE TEXT,
+DATE DATETIME,
+FOREIGN KEY(CUSTOMER) REFERENCES CUSTOMER(LOGIN_CUSTOMER),
+FOREIGN KEY(SUPPLIER) REFERENCES SUPPLIER(LOGIN_SUPPLIER),
+FOREIGN KEY(QUOTE_ID) REFERENCES QUOTE(ID_QUOTE)
+)
+"""
+
+sql_tabla_sesiones_cliente = '''
+CREATE TABLE SESIONES_CUSTOMER(
+ ID INTEGER PRIMARY KEY,
+ LOGIN_CUSTOMER TEXT,
+ FECHA_HORA TEXT,
+ FOREIGN KEY(LOGIN_CUSTOMER) REFERENCES CUSTOMER(LOGIN_CUSTOMER) 
+)
+'''
+
+sql_tabla_sesiones_proveedor = '''
+CREATE TABLE SESIONES_SUPPLIER(
+ ID INTEGER PRIMARY KEY,
+ LOGIN_SUPPLIER TEXT,
+ FECHA_HORA TEXT,
+ FOREIGN KEY(LOGIN_SUPPLIER) REFERENCES CUSTOMER(LOGIN_SUPPLIER) 
+)
+'''
+
+if __name__ == '__main__':
+    try:
+        print('Creando Base de datos..')
+        conexion = sqlite3.connect('bid2win.db')
+
+        print('Creando Tablas..')
+        conexion.execute(sql_tabla_usuario_cliente)
+        conexion.execute(sql_tabla_usuario_proveedor)
+        conexion.execute(sql_tabla_cotizacion)
+        conexion.execute(sql_tabla_status)
+        conexion.execute(sql_tabla_chat)
+        conexion.execute(sql_tabla_sesiones_cliente)
+        conexion.execute(sql_tabla_sesiones_proveedor)
+
+        conexion.close()
+        print('Creacion Finalizada.')
+    except Exception as e:
+        print(f'Error creando base de datos: {e}', e)
